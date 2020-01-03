@@ -9,6 +9,7 @@ import br.com.primeup.anbimautils.pageobjects.gao.TelaAdministrarOrganismo;
 import br.com.primeup.anbimautils.pageobjects.gao.TelaNovaReuniao;
 import br.com.primeup.anbimautils.pageobjects.gao.TelaOrganismos;
 import br.com.primeup.anbimautils.utils.MassaUtils;
+import br.com.primeup.anbimautils.utils.PropertiesUtils;
 import br.com.primeup.anbimautils.utils.UsuarioUtils;
 
 public class CriaReuniaoOrganismo {
@@ -17,7 +18,7 @@ public class CriaReuniaoOrganismo {
 	public static void main(String[] args) {
 		TelaDeLogin telaDeLogin = new TelaDeLogin(WebDriverUtils.instanciaChromeDriver());
 		TelaOrganismos telaOrganismos = (TelaOrganismos) telaDeLogin.realizaLogin(GAO, usuario);
-		telaOrganismos.insereFiltroOrganismo("Lorem");
+		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("LOREM"));
 		telaOrganismos.clicaBotaoFiltrarOrganismo();
 
 		TelaAdministrarOrganismo telaAdministrarOrganismo = telaOrganismos.clicaBotaoAdministrar(1);
