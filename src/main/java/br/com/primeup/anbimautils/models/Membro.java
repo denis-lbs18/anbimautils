@@ -3,6 +3,7 @@ package br.com.primeup.anbimautils.models;
 import br.com.primeup.anbimautils.enums.CargoMembro;
 import br.com.primeup.anbimautils.enums.PermissaoForum;
 import br.com.primeup.anbimautils.enums.Sexos;
+import br.com.primeup.anbimautils.utils.PropertiesUtils;
 
 public class Membro {
 	private Sexos genero;
@@ -10,7 +11,7 @@ public class Membro {
 	private String nome;
 	private String instituicao;
 	private String instituicaoIndicada;
-	private String emailPrincipal = "tstdsftwr@gmail.com";
+	private String emailPrincipal = PropertiesUtils.getVariable("EMAIL_PRINCIPAL");
 	private String emailSecundario;
 	private Celular telefonePrimario;
 	private Celular telefoneSecundario;
