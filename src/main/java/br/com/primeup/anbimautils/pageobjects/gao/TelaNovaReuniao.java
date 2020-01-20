@@ -5,7 +5,6 @@ import static br.com.primeup.anbimautils.enums.LocalReuniao.OUTRO;
 import java.time.LocalDate;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 
 import br.com.denisluna.selenium_utils.enums.Formato;
@@ -36,13 +35,7 @@ public class TelaNovaReuniao extends TelaBaseAnbima {
 
 	public void escolheTipoReuniao(TipoReuniao tipo) {
 		By opcaoPermissaoAcesso = ByUtils.encontraByTextoContains(ByUtils.LABEL, tipo.toString());
-
-		try {
-			this.getElemento().elementoWebClica(opcaoPermissaoAcesso);
-		} catch (ElementClickInterceptedException ex) {
-			this.trataErroEAguardaContinuidadeConsole("Erro ao selecionar tipo de reunião.");
-		}
-		this.sleep(1);
+		this.escolheOption(opcaoPermissaoAcesso, "Erro ao selecionar tipo de reunião.");
 	}
 
 	public void insereInputData(LocalDate data) {
@@ -94,13 +87,7 @@ public class TelaNovaReuniao extends TelaBaseAnbima {
 
 	public void escolheContabilizacaoDeFalta(RespostaBinaria resposta) {
 		By optionContabilizacaoDeFalta = ByUtils.encontraByTextoContains(ByUtils.LABEL, resposta.toString());
-
-		try {
-			this.getElemento().elementoWebClica(optionContabilizacaoDeFalta);
-		} catch (ElementClickInterceptedException ex) {
-			this.trataErroEAguardaContinuidadeConsole("Erro ao selecionar Contabilização de falta.");
-		}
-		this.sleep(1);
+		this.escolheOption(optionContabilizacaoDeFalta, "Erro ao selecionar Contabilização de falta.");
 	}
 
 	public int listaQuantidadeItensParticipacaoEfetiva() {

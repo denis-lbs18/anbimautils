@@ -11,7 +11,7 @@ public class Membro {
 	private String nome;
 	private String instituicao;
 	private String instituicaoIndicada;
-	private String emailPrincipal = PropertiesUtils.getVariable("EMAIL_PRINCIPAL");
+	private String emailPrincipal = PropertiesUtils.getVariable("massa.email.teste");
 	private String emailSecundario;
 	private Celular telefonePrimario;
 	private Celular telefoneSecundario;

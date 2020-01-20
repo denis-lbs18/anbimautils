@@ -11,12 +11,18 @@ import br.com.denisluna.selenium_utils.utils.selenium.ByUtils;
 import br.com.primeup.anbimautils.models.TelaBaseAnbima;
 
 public class TelaOrganismos extends TelaBaseAnbima {
+	private By botaoNovoOrganismo = ByUtils.encontraByID("novoOrganismo");
 	private By inputFiltroOrganismo = ByUtils.encontraByID("nomeOrganiamo");
 	private By botaoFiltrarOrganismo = ByUtils.encontraByID("filtrarButton");
 	private By linkAdministrar = ByUtils.encontraByTexto(ByUtils.A_LINK, "Administrar");
 
 	public TelaOrganismos(WebDriver driver) {
 		super(driver);
+	}
+
+	public TelaNovoOrganismo clicaBotaoNovoOrganismo() {
+		this.getElemento().elementoWebClica(this.botaoNovoOrganismo);
+		return new TelaNovoOrganismo(this.getDriver());
 	}
 
 	public void insereFiltroOrganismo(String texto) {

@@ -19,14 +19,14 @@ public class InsereCadastroUsuariosOrganismos {
 	public static void main(String[] args) {
 		TelaDeLogin telaDeLogin = new TelaDeLogin(WebDriverUtils.instanciaChromeDriver());
 		TelaOrganismos telaOrganismos = (TelaOrganismos) telaDeLogin.realizaLogin(GAO, usuario);
-		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("LOREM"));
+		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("organismo.nome"));
 		telaOrganismos.clicaBotaoFiltrarOrganismo();
 
 		TelaAdministrarOrganismo telaAdministrarOrganismo = telaOrganismos.clicaBotaoAdministrar(1);
 		telaAdministrarOrganismo.clicaLinkExpandirMembrosOrganismos();
 		TelaConfiguracaoMandatos telaConfiguracaoMandatos = telaAdministrarOrganismo.clicaBotaoAdministrarMandato();
 
-		for (Membro membro : MassaUtils.geraListaMembrosSimplificado(3)) {
+		for (Membro membro : MassaUtils.geraListaMembrosSimplificado(1)) {
 			telaConfiguracaoMandatos.clicaBotaoAdicionarMembro();
 			telaConfiguracaoMandatos.clicaLinkCadastreAgora();
 			telaConfiguracaoMandatos.incluiNovoMembroSimplificado(membro);

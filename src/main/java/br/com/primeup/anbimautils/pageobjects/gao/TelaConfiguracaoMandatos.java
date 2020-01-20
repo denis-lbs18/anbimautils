@@ -1,7 +1,6 @@
 package br.com.primeup.anbimautils.pageobjects.gao;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
@@ -181,14 +180,8 @@ public class TelaConfiguracaoMandatos extends TelaBaseAnbima {
 	}
 
 	public void selecionaPermissaoAcessoForum(PermissaoForum permissao) {
-		try {
-			By opcaoPermissaoAcesso = ByUtils.encontraByTextoContains(ByUtils.LABEL, permissao.toString());
-
-			this.getElemento().elementoWebClica(opcaoPermissaoAcesso);
-			this.sleep(1);
-		} catch (ElementClickInterceptedException ex) {
-			this.trataErroEAguardaContinuidadeConsole("Erro ao selecionar permissão de acesso.");
-		}
+		By opcaoPermissaoAcesso = ByUtils.encontraByTextoContains(ByUtils.LABEL, permissao.toString());
+		this.escolheOption(opcaoPermissaoAcesso, "Erro ao selecionar permissão de acesso.");
 	}
 
 	public void clicaBotaoSalvar() {

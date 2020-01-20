@@ -9,14 +9,18 @@ import com.thedeanda.lorem.LoremIpsum;
 
 import br.com.denisluna.selenium_utils.utils.NumberUtils;
 import br.com.primeup.anbimautils.enums.CargoMembro;
+import br.com.primeup.anbimautils.enums.Categoria;
 import br.com.primeup.anbimautils.enums.LocalReuniao;
 import br.com.primeup.anbimautils.enums.Operadoras;
 import br.com.primeup.anbimautils.enums.PermissaoForum;
 import br.com.primeup.anbimautils.enums.RespostaBinaria;
 import br.com.primeup.anbimautils.enums.Sexos;
+import br.com.primeup.anbimautils.enums.TermoUtilizar;
+import br.com.primeup.anbimautils.enums.TipoOrganismo;
 import br.com.primeup.anbimautils.enums.TipoReuniao;
 import br.com.primeup.anbimautils.models.Celular;
 import br.com.primeup.anbimautils.models.Membro;
+import br.com.primeup.anbimautils.models.Organismo;
 import br.com.primeup.anbimautils.models.Reuniao;
 import br.com.primeup.anbimautils.models.Secretaria;
 
@@ -243,5 +247,38 @@ public class MassaUtils {
 		Reuniao reuniao = new Reuniao(tipo, data, horaInicio, horaTermino, assunto, local, outroLocal, textoInvite,
 				contabilizacaoDeFalta);
 		return reuniao;
+	}
+
+	public static Organismo geraOrganismo() {
+		StringBuilder nome = new StringBuilder("Organismo ");
+		nome.append(lipsum.getWords(2, 4));
+
+		TipoOrganismo tipoOrganismo = TipoOrganismo.COMISSAO;
+
+		String codigoPertence = "Código de Ética";
+		RandomEnum<Categoria> randomCategoria = new RandomEnum<>(Categoria.class);
+		Categoria categoria = randomCategoria.random();
+
+		LocalDate dataInicio = LocalDate.now();
+		LocalDate dataFim = dataInicio.plusYears(5);
+
+		int qtdeMinimaMembros = NumberUtils.pegaNumeroAleatorio(1, 10);
+		int qtdeMaximaMembros = NumberUtils.pegaNumeroAleatorio(qtdeMinimaMembros, 10);
+
+		RandomEnum<RespostaBinaria> randomRespostaBinaria = new RandomEnum<>(RespostaBinaria.class);
+		RespostaBinaria possuiTermo = randomRespostaBinaria.random();
+
+		RespostaBinaria possuiRevisaoDeMembros = randomRespostaBinaria.random();
+
+		RandomEnum<TermoUtilizar> randomTermo = new RandomEnum<>(TermoUtilizar.class);
+		TermoUtilizar termo = randomTermo.random();
+
+		RespostaBinaria enviarComunicacaoMembro = randomRespostaBinaria.random();
+
+		RespostaBinaria solicitarAssinatura = randomRespostaBinaria.random();
+
+		return new Organismo(nome.toString(), tipoOrganismo, codigoPertence, categoria, dataInicio, dataFim,
+				qtdeMinimaMembros, qtdeMaximaMembros, possuiTermo, possuiRevisaoDeMembros, termo,
+				enviarComunicacaoMembro, solicitarAssinatura);
 	}
 }

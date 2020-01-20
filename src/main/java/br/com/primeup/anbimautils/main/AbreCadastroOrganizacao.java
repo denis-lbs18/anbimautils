@@ -16,7 +16,7 @@ public class AbreCadastroOrganizacao {
 	public static void main(String[] args) {
 		TelaDeLogin telaDeLogin = new TelaDeLogin(WebDriverUtils.instanciaChromeDriver());
 		TelaOrganismos telaOrganismos = (TelaOrganismos) telaDeLogin.realizaLogin(GAO, usuario);
-		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("LOREM"));
+		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("organismo.nome"));
 		telaOrganismos.clicaBotaoFiltrarOrganismo();
 
 		TelaAdministrarOrganismo telaAdministrarOrganismo = telaOrganismos.clicaBotaoAdministrar(1);
