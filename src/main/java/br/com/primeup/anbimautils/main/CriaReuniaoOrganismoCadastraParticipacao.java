@@ -6,7 +6,7 @@ import br.com.denisluna.selenium_utils.modelos.Usuario;
 import br.com.denisluna.selenium_utils.utils.selenium.WebDriverUtils;
 import br.com.primeup.anbimautils.pageobjects.TelaDeLogin;
 import br.com.primeup.anbimautils.pageobjects.gao.TelaAdministrarOrganismo;
-import br.com.primeup.anbimautils.pageobjects.gao.TelaNovaReuniao;
+import br.com.primeup.anbimautils.pageobjects.gao.TelaReuniao;
 import br.com.primeup.anbimautils.pageobjects.gao.TelaOrganismos;
 import br.com.primeup.anbimautils.utils.MassaUtils;
 import br.com.primeup.anbimautils.utils.PropertiesUtils;
@@ -22,7 +22,7 @@ public class CriaReuniaoOrganismoCadastraParticipacao {
 		telaOrganismos.clicaBotaoFiltrarOrganismo();
 
 		TelaAdministrarOrganismo telaAdministrarOrganismo = telaOrganismos.clicaBotaoAdministrar(1);
-		TelaNovaReuniao telaNovaReuniao = telaAdministrarOrganismo.clicaBotaoNovaReuniao();
+		TelaReuniao telaNovaReuniao = telaAdministrarOrganismo.clicaBotaoNovaReuniao();
 		telaNovaReuniao.cadastraReuniaoSelecionaParticipacao(MassaUtils.geraReuniao());
 	}
 }

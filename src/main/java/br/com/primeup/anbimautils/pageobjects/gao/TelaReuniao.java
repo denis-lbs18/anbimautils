@@ -3,22 +3,28 @@ package br.com.primeup.anbimautils.pageobjects.gao;
 import static br.com.primeup.anbimautils.enums.LocalReuniao.OUTRO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import br.com.denisluna.selenium_utils.enums.Formato;
 import br.com.denisluna.selenium_utils.utils.LocalDateTimeUtils;
 import br.com.denisluna.selenium_utils.utils.selenium.ByUtils;
+import br.com.primeup.anbimautils.enums.EstadoReuniao;
 import br.com.primeup.anbimautils.enums.LocalReuniao;
 import br.com.primeup.anbimautils.enums.Participacao;
 import br.com.primeup.anbimautils.enums.RespostaBinaria;
 import br.com.primeup.anbimautils.enums.TipoReuniao;
 import br.com.primeup.anbimautils.models.Reuniao;
 import br.com.primeup.anbimautils.models.TelaBaseAnbima;
+import br.com.primeup.anbimautils.utils.PropertiesUtils;
 import br.com.primeup.anbimautils.utils.RandomEnum;
 
-public class TelaNovaReuniao extends TelaBaseAnbima {
+public class TelaReuniao extends TelaBaseAnbima {
+	private static final String XPATH_MEMBRO_REUNIAO = PropertiesUtils
+			.getVariable("project.params.xpath.reuniao.membro");;
 	private By inputData = ByUtils.encontraByID("dataReuniao");
 	private By inputHoraInicio = ByUtils.encontraByID("horarioInicial");
 	private By inputHoraTerminio = ByUtils.encontraByID("horarioFinal");
@@ -28,8 +34,10 @@ public class TelaNovaReuniao extends TelaBaseAnbima {
 	private By inputTextoInvite = ByUtils.encontraByID("textoInvite");
 	private By botaoSalvar = ByUtils.encontraByID("btnCriarReuniao");
 	private By selectParticipacaoEfetiva = ByUtils.encontraByClass(ByUtils.SELECT, "gnosys-select");
+	private By listaChecksAdministradores = By
+			.xpath("//tbody[@id='tabela-lista-administradores-reuniao:tb']//input[contains(@class, 'gnosys-check')]");
 
-	public TelaNovaReuniao(WebDriver driver) {
+	public TelaReuniao(WebDriver driver) {
 		super(driver);
 	}
 
@@ -102,7 +110,6 @@ public class TelaNovaReuniao extends TelaBaseAnbima {
 
 	public void cadastraReuniao(Reuniao reuniao) {
 		preencheDados(reuniao);
-		this.clicaBotaoSalvar();
 	}
 
 	public void selecionaParticipacaoEfetiva(Participacao participacao, int index) {
@@ -144,5 +151,24 @@ public class TelaNovaReuniao extends TelaBaseAnbima {
 
 		this.insereInputTextoInvite(reuniao.getTextoInvite());
 		this.escolheContabilizacaoDeFalta(reuniao.getContabilizacaoDeFalta());
+	}
+
+	public void selecionaEstadoReuniao(EstadoReuniao estado, String membro) {
+		this.sleep(2);
+		By selectEstado = By.xpath(String.format(XPATH_MEMBRO_REUNIAO, membro));
+
+		this.getElemento().elementoWebMoveParaOElemento(selectEstado);
+		this.getElemento().elementoWebSelecionaListaSelect(selectEstado, estado.toString());
+		this.sleep(2);
+	}
+
+	public void selecionaAdministradoresReuniao() {
+		List<WebElement> listaChecks = this.getElemento().elementoWebAchaElementosWait(this.listaChecksAdministradores);
+
+		for (WebElement check : listaChecks) {
+			check.click();
+			this.sleep(2);
+		}
+
 	}
 }

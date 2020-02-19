@@ -7,12 +7,15 @@ import br.com.denisluna.selenium_utils.utils.selenium.ByUtils;
 import br.com.primeup.anbimautils.enums.CargoMembro;
 import br.com.primeup.anbimautils.models.TelaBaseAnbima;
 import br.com.primeup.anbimautils.utils.MassaUtils;
+import br.com.primeup.anbimautils.utils.PropertiesUtils;
 
 public class TelaAdministrarOrganismo extends TelaBaseAnbima {
+	private static final String XPATH_REUNIAO = PropertiesUtils.getVariable("project.params.xpath.reuniao");
 	private By botaoNovaReuniao = ByUtils.encontraByID("form-area-botoes-nova-reuniao:novaReuniao");
 	private By botaoControleDeFaltas = ByUtils.encontraByID("form-area-botoes-nova-reuniao:controleFaltas");
 	private By botaoAdministrarMandato = ByUtils.encontraByID("administrarMandato");
 	private By linkExpandirMembrosOrganismos = By.xpath("//div[@id='bloco-lista-membros']//p[1]");
+	private By linkExpandirReunioes = By.xpath("//div[@id='formListarReunioes:bloco-lista-reunioes']//p[1]");
 	private By labelPresidente = ByUtils.encontraByTexto(ByUtils.LABEL, CargoMembro.PRESIDENTE.toString());
 	private By labelVicePresidente = ByUtils.encontraByTexto(ByUtils.LABEL, CargoMembro.VICE_PRESIDENTE.toString());
 
@@ -20,9 +23,9 @@ public class TelaAdministrarOrganismo extends TelaBaseAnbima {
 		super(driver);
 	}
 
-	public TelaNovaReuniao clicaBotaoNovaReuniao() {
+	public TelaReuniao clicaBotaoNovaReuniao() {
 		this.getElemento().elementoWebClica(this.botaoNovaReuniao);
-		return new TelaNovaReuniao(this.getDriver());
+		return new TelaReuniao(this.getDriver());
 	}
 
 	public void clicaBotaoControleDeFaltas() {
@@ -48,5 +51,17 @@ public class TelaAdministrarOrganismo extends TelaBaseAnbima {
 
 	public void clicaLinkExpandirMembrosOrganismos() {
 		this.getElemento().elementoWebClica(this.linkExpandirMembrosOrganismos);
+	}
+
+	public void clicaLinkExpandirHistoricoReunioes() {
+		this.getElemento().elementoWebClica(this.linkExpandirReunioes);
+	}
+
+	public TelaReuniao clicaBotaoEditarReuniao(String reuniao) {
+		By linkEditarReuniao = By.xpath(String.format(XPATH_REUNIAO, reuniao));
+		this.getElemento().elementoWebClica(linkEditarReuniao);
+		this.sleep(2);
+
+		return new TelaReuniao(this.getDriver());
 	}
 }

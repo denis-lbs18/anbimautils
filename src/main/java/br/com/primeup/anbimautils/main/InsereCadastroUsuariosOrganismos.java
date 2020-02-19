@@ -19,7 +19,7 @@ public class InsereCadastroUsuariosOrganismos {
 	public static void main(String[] args) {
 		TelaDeLogin telaDeLogin = new TelaDeLogin(WebDriverUtils.instanciaChromeDriver());
 		TelaOrganismos telaOrganismos = (TelaOrganismos) telaDeLogin.realizaLogin(GAO, usuario);
-		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("organismo.nome"));
+		telaOrganismos.insereFiltroOrganismo(PropertiesUtils.getVariable("massa.organismo.nome"));
 		telaOrganismos.clicaBotaoFiltrarOrganismo();
 
 		TelaAdministrarOrganismo telaAdministrarOrganismo = telaOrganismos.clicaBotaoAdministrar(1);

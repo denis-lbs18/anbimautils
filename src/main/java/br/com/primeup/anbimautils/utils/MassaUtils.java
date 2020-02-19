@@ -226,7 +226,7 @@ public class MassaUtils {
 		RandomEnum<TipoReuniao> randomTipo = new RandomEnum<>(TipoReuniao.class);
 		TipoReuniao tipo = randomTipo.random();
 
-		LocalDate data = LocalDate.now();
+		LocalDate data = LocalDate.now().plusDays(1);
 
 		LocalTime horaAtual = LocalTime.now();
 
@@ -250,7 +250,7 @@ public class MassaUtils {
 	}
 
 	public static Organismo geraOrganismo() {
-		StringBuilder nome = new StringBuilder("Organismo ");
+		StringBuilder nome = new StringBuilder("Pseudo Organismo ");
 		nome.append(lipsum.getWords(2, 4));
 
 		TipoOrganismo tipoOrganismo = TipoOrganismo.COMISSAO;
