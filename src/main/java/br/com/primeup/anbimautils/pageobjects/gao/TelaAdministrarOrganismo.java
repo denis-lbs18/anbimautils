@@ -11,6 +11,8 @@ import br.com.primeup.anbimautils.utils.PropertiesUtils;
 
 public class TelaAdministrarOrganismo extends TelaBaseAnbima {
 	private static final String XPATH_REUNIAO = PropertiesUtils.getVariable("project.params.xpath.reuniao");
+	private static final String XPATH_REUNIAO_MEMBRO = PropertiesUtils
+			.getVariable("project.params.xpath.reuniao.visaomembro");
 	private By botaoNovaReuniao = ByUtils.encontraByID("form-area-botoes-nova-reuniao:novaReuniao");
 	private By botaoControleDeFaltas = ByUtils.encontraByID("form-area-botoes-nova-reuniao:controleFaltas");
 	private By botaoAdministrarMandato = ByUtils.encontraByID("administrarMandato");
@@ -62,6 +64,14 @@ public class TelaAdministrarOrganismo extends TelaBaseAnbima {
 		this.getElemento().elementoWebClica(linkEditarReuniao);
 		this.sleep(2);
 
+		return new TelaReuniao(this.getDriver());
+	}
+	
+	public TelaReuniao clicaBotaoEditarReuniaoVisaoMembro(String reuniao) {
+		By linkEditarReuniao = By.xpath(String.format(XPATH_REUNIAO_MEMBRO, reuniao));
+		this.getElemento().elementoWebClica(linkEditarReuniao);
+		this.sleep(2);
+		
 		return new TelaReuniao(this.getDriver());
 	}
 }
